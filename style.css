@@ -1,0 +1,69 @@
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Sarabun;
+    overflow-x: hidden;
+    background-color: white;
+    color: black;
+
+}
+
+
+header {
+    padding: 10px;
+    height: 30%;
+    text-align: center;
+    font-size: 35px;
+    border: 1px solid black;
+    display: block;
+    margin: 0;
+    margin-bottom: -1px;
+}
+
+h1,
+h2,
+h3 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin: auto;
+    background-color: rgb(209, 209, 209);
+}
+
+.img_icons {
+    height: 50px;
+    width: 50px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+input {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: green;
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    font-size: larger;
+    font-family: Sarabun;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(4, 184, 4);
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}

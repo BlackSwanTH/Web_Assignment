@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income tax Calculator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sarabun">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="header">
+        <h1>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา</h1>
+    </header>
+    <div style="display: flex; height: 400px;">
+
+        <div style="width: 30%; padding: 10px; border: 1px solid;">
+            <div style="display: flex; justify-content: center;">
+                <h3>รายได้ (บาท)</h3>
+                <img src="icons/plus.png" alt="" class="img_icons" onclick="plus()" id="plus">
+                <img src="icons/minus.png" alt="" class="img_icons" onclick="minus()" id="minus">
+            </div>
+            <div style="text-align: center;">
+                <div><input type="text" id="in0" onchange="sum()"></div>
+                <div><input type="text" style="visibility: hidden;" id="in1" onchange="sum()"></div>
+                <div><input type="text" style="visibility: hidden;" id="in2" onchange="sum()"></div>
+                <!-- <button onclick="sum()">รวมค่า</button> -->
+            </div>
+        </div>
+        <div style="width: 70%;padding: 10px; border: 1px solid; margin-left: -1px;">
+            <h3>รายได้รวม (บาท)</h3>
+            <p id="inc_sum"></p>
+            <h3>อัตราภาษี (%)</h3>
+            <p id="tax" onchange=""></p>
+            <h3>ภาษีที่ต้องจ่าย</h3>
+            <p id="total_tax"></p>
+        </div>
+    </div>
+    <div style="margin: auto; display: flex; align-items: center; margin-top: 10px; justify-content: center;"><button
+            onclick="toggle()">toggle
+        </button></div>
+    <script>
+        // เปิด/ปิดการใส่รายการรายได้
+        var count = 0;
+        var click = 0;
+        var s = 0;
+            // คำนวณภาษี
+        function plus() {
+            if (count < 2) {
+                count += 1;
+                document.getElementById('in' + count).style.visibility = 'visible';
+            }
+        }
+        function minus() {
+            if (count > 0) {
+                document.getElementById('in' + count).value = null;
+                document.getElementById('in' + count).style.visibility = 'hidden';
+                count -= 1;
+            }
+        }
+        function toggle() {
+            document.body.classList.toggle("dark-mode");
+            let p = document.getElementsByTagName("p");
+            for (let i = 0; i < p.length; i++) {
+                p[i].style.color = 'black';
+            }
+        }
+        function sum(){
+            // รวมรายได้
+        var inp = document.getElementsByTagName('input');
+        for (let i = 0; i < inp.length; i++) {
+            if (inp[i] && inp[i].value) {
+                if (parseInt(inp[i].value)) {
+                    if (parseInt(inp[i].value) > 0) {
+                        s += parseInt(inp[i].value);
+                    }
+                    else {
+                        alert('มีบางรายการที่ค่าเป็นลบ');
+                    }
+                }
+                else {
+                    alert('มีบางรายการที่ค่าเป็น non-numeric');
+                }
+            }
+        }
+        document.getElementById('inc_sum').innerHTML = s;
+
+        // หาฐานภาษี
+        let p = document.getElementById('tax');
+        let d = document.getElementById('total_tax');
+        if (s >= 5000001) {
+            p.innerHTML = '35%';
+
+        }
+        else if (s >= 2000001 && s <= 5000000) {
+            p.innerHTML = '30%';
+        }
+        else if (s >= 1000001 && s <= 2000000) {
+            p.innerHTML = '25%';
+        }
+        else if (s >= 750001 && s <= 1000000) {
+            p.innerHTML = '20%';
+        }
+        else if (s >= 500001 && s <= 750000) {
+            p.innerHTML = '15%';
+        }
+        else if (s >= 300001 && s <= 500000) {
+            p.innerHTML = '10%';
+        }
+        else if (s >= 150001 && s <= 300000) {
+            p.innerHTML = '5%';
+        }
+        else if (s >= 0 && s <= 150000) {
+            p.innerHTML = 'ได้รับการยกเว้นภาษี';
+        }
+        if (p.innerHTML === 'ได้รับการยกเว้นภาษี') {
+            d.innerHTML = '0';
+        }
+        else {
+            d.innerHTML = s * (parseInt(p.innerText.replace('%', '')) / 100)
+        }
+        }
+
+        
+    </script>
+</body>
+
+</html>
